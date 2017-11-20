@@ -15,16 +15,19 @@ if(command === 'add'){
     var note = notes.addNote(argv.title, argv.body);
     if(note){
         console.log("Note created");
-        console.log("--------");
-        console.log(`Title: ${note.title}`);
-        console.log(`Body: ${note.body}`);
+        notes.logNote(note);
     }else{
         console.log("title exist");
     }
 }else if(command=== 'list'){
     notes.getAll();
 }else if(command === 'read'){
-    notes.getNote(argv.title);
+    var note = notes.getNote(argv.title);
+    if(note){
+        notes.logNote(note);
+    }else{
+        console.log("note not found");
+    }
 }else if(command === 'remove'){
     var noteRemoved = notes.removeNote(argv.title);
     var message = noteRemoved ? "Note was removed sucessfully": "Not not found"
